@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { CreateUserDto } from './dto/create-user-dto';
 
 import { User } from './schemas/users.schema';
 
@@ -10,16 +11,18 @@ export class UsersService {
     @InjectModel('User') private readonly userModel: Model<User>,
   ) {}
 
-  async createUser(username: string, fullName: string, email: string, password: string) {
+  async createUser(userObj: CreateUserDto): Promise<any>{
     const newUser = new this.userModel({
-        username,
-        fullName,
-        email,
-        password,
+        username: userObj.username,
+        fullName: userObj.fullName,
+        email: userObj.email,
+        password: userObj.password,
+        isadmin: userObj?.isadmin,
+        role: userObj?.role
     });
-    const user = await this.findUser(username);
+    const user = await this.findUser(userObj.username, userObj.email);
     if (user) {
-      return { id: null, msg:'User already exists'};
+      return { id: null, msg:'UserId or Email already registered'};
     }else{
       const result = await newUser.save();
       return { id: result.id as string, msg:'User registered successfully!' };
@@ -76,8 +79,8 @@ export class UsersService {
 //     }
 //   }
 
-  private async findUser(id: string): Promise<User> {
-    let user = await this.userModel.findOne({username: id}).exec();
+  private async findUser(usrname: string, eml: string): Promise<User> {
+    let user = await this.userModel.findOne().or([{ username: usrname }, { email: eml }]).exec();
     return user;
   }
 }
