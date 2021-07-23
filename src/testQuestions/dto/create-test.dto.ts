@@ -5,7 +5,7 @@ export class McqTestDto {
     testId: string;
     testName: string;
     testDescription: string;
-    questionIds: string[];
+    numberOfQuestions: number;
     testDuration: number;
     testStatus: string;
     testIsOpen: boolean;

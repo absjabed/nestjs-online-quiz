@@ -12,6 +12,7 @@ export const QuestionSchema = new mongoose.Schema({
 });
 
 export interface Question extends mongoose.Document {
+    id: string,
     questionId: string;
     questionName: string;
     questionDescription: string;
