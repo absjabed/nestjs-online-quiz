@@ -9,6 +9,7 @@ export const UserSchema = new mongoose.Schema({
   created: { type: Date, default: Date.now },
   isadmin: { type: Boolean, default: false },
   role: { type: String, default: 'taker' },
+  testsTaken: { type : Array , "default" : [] },
   isactive: { type: Boolean, default: true }
 });
 
@@ -20,5 +21,6 @@ export interface User extends mongoose.Document {
   created: Date;
   isadmin: boolean;
   role: string;
+  testsTaken: Array<string>;
   isactive: boolean;
 }

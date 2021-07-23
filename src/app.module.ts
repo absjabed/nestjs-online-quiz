@@ -3,11 +3,14 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { TestQuestionModule } from './testQuestions/testQuestions.module';
 import { UsersModule } from './users/users.module';
+
 
 @Module({
   imports: [
     UsersModule,
+    TestQuestionModule,
     MongooseModule.forRoot(
       'mongodb+srv://dbUser:dbUser@123@cluster0.kxec3.mongodb.net/nestjs-quizapp?retryWrites=true&w=majority',
     ),

@@ -1,3 +1,48 @@
+GET  http://localhost:3000/test-questions/questions
+
+
+###
+PATCH http://localhost:3000/test-questions/updateQuestion
+Content-Type: application/json
+
+ 
+
+###
+POST http://localhost:3000/test-questions/newQuestion
+Content-Type: application/json
+
+{
+    "questionId": "q1",
+    "questionName": "What is the meaning of life?",
+    "questionDescription": "What is the meaning of life?",
+    "answerOptions": [
+        {
+            "optionId": 1,
+            "optionDescription": "42",
+            "isCorrect": true
+        },
+        {
+            "optionId": 2,
+            "optionDescription": "43",
+            "isCorrect": false
+        },
+        {
+            "optionId": 3,
+            "optionDescription": "44",
+            "isCorrect": false
+        },
+        {
+            "optionId": 4,
+            "optionDescription": "45",
+            "isCorrect": false
+        }
+    ],
+    "correctAnswer": 1,
+    "isPublished": true
+}
+
+
+###
 GET  http://localhost:3000/users
 
 ###
