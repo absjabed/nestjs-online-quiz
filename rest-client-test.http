@@ -6,9 +6,7 @@ Content-Type: application/json
     "username": "test2",
     "fullName": "Test User 2",
     "email": "test2@mail.com",
-    "password": "pass123",
-    "isadmin": false,
-    "role": "taker"
+    "password": "pass123"
 }
 ### 2 - login
 POST http://localhost:3000/auth/login
