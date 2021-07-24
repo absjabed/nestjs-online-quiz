@@ -1,26 +1,26 @@
-GET  http://localhost:3000/test-questions/deleteTest/test01
+GET  http://localhost:3000/quiz-test/deleteQuiz/quiz01
 ###
-GET  http://localhost:3000/test-questions/test/test01
+GET  http://localhost:3000/quiz-test/quiz/quiz04
 
 ###
-POST http://localhost:3000/test-questions/newTest
+POST http://localhost:3000/quiz-test/newQuizTest
 Content-Type: application/json
 
 {
-    "testId": "test03",
-    "testName": "Test-03",
-    "testDescription": "This is Test-03",
-    "numberOfQuestions": 5,
-    "testDuration": 15,
-    "testStatus": "active",
-    "testIsOpen": true
+    "quizId": "quiz04",
+    "quizName": "Quiz-04",
+    "quizDescription": "This is Quiz-04",
+    "numberOfQuestions": 7,
+    "quizDuration": 18,
+    "quizStatus": "active",
+    "quizIsOpen": false
 }
 
 ###
-GET  http://localhost:3000/test-questions/questions
+GET  http://localhost:3000/quiz-questions/questions
 
 ###
-PATCH http://localhost:3000/test-questions/updateQuestion
+PATCH http://localhost:3000/quiz-questions/updateQuestion
 Content-Type: application/json
 
 {
@@ -30,11 +30,11 @@ Content-Type: application/json
  
 
 ###
-POST http://localhost:3000/test-questions/newQuestion
+POST http://localhost:3000/quiz-questions/newQuestion
 Content-Type: application/json
 
 {
-        "questionId": "q11",
+        "questionId": "q10",
         "questionName": "Development Knowledge",
         "questionDescription": "What is correct MIME type for JSON ?",
         "answerOptions": [
