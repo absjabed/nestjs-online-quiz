@@ -8,7 +8,7 @@
 
 ## Description
 
-Online quiz application backend with Node.js framework. available features are user login, user register.
+Online quiz application backend with Node.js framework. available features are user login, user register, quiz addition, question addition.
 
 ## Technologies Used
 
