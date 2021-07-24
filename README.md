@@ -20,6 +20,30 @@ Online quiz application backend with Node.js framework. available features are u
 - rest client
 - git
 
+## Application Entities
+
+- Users (Quiz Setter/Taker)
+- Quiz
+- Question -> Options
+
+## Folder structure
+```bash
+- src
+    - auth # User authentication and JWT implementation features
+    - users # User Entity implementation
+        - dto # Data Transfer Object
+        - schemas # Entity schema
+    - quizTest # Quiz Entity implementation
+        - dto
+        - schemas
+    - quizQuestions # Quiz Question Entity implementation
+        - dto 
+        - schemas
+- example-questions.json # question examples in json format
+- example-quizes.json # quiz examples in json format
+- rest-client-test.http  # api request test example
+```
+
 ## Installation
 
 ```bash
@@ -54,7 +78,7 @@ Content-Type: application/json
     "password": "pass123"
 }
 ```
-### 2 - login
+### 2 - login -> response will be a jwt token for api authorization
 ```
 POST http://localhost:3000/auth/login
 Content-Type: application/json
@@ -70,7 +94,7 @@ GET  http://localhost:3000/quiz-test/availableQuizes
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9....
 ```
 
-### 4 - request for a quiz
+### 4 - user requests for taking a quiz -> in response get a quiz with unique request id
 ```
 POST http://localhost:3000/users/requestQuiz
 Content-Type: application/json
@@ -80,7 +104,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.....
     "quizId": "quiz03"
 }
 ```
-### 5 - submit quiz answer
+### 5 - user submits quiz answer with unique request id and quiz score
 ```
 POST http://localhost:3000/users/submitQuiz
 Content-Type: application/json
@@ -109,7 +133,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9....
     "quizIsOpen": false
 }
 ```
-### 7 - update/patch a quiz
+### 7 - update/patch a quiz info according to quiz schema
 ```
 PATCH http://localhost:3000/quiz-test/updateQuiz
 Content-Type: application/json
@@ -156,12 +180,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9....
         "isPublished": true
     }
 ```
-### 9 - get all available quiz questions
+### 9 - get all available quiz questions (only questions)
 ```
 GET  http://localhost:3000/quiz-questions/questions
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9....
 ```
-### 10 - update/patch a quiz question
+### 10 - update/patch a quiz question with question id
 ```
 PATCH http://localhost:3000/quiz-questions/updateQuestion
 Content-Type: application/json
