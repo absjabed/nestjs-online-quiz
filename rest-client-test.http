@@ -7,11 +7,11 @@ POST http://localhost:3000/test-questions/newTest
 Content-Type: application/json
 
 {
-    "testId": "test01",
-    "testName": "Test-01",
-    "testDescription": "This is Test-01",
-    "numberOfQuestions": 3,
-    "testDuration": 10,
+    "testId": "test03",
+    "testName": "Test-03",
+    "testDescription": "This is Test-03",
+    "numberOfQuestions": 5,
+    "testDuration": 15,
     "testStatus": "active",
     "testIsOpen": true
 }

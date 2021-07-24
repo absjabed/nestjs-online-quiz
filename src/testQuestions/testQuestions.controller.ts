@@ -33,7 +33,6 @@ export class TestQuestionsController {
       return this.testQuestionsService.addNewQuestion(mcqQuestionDto);
   }
 
-  //@Patch(':qid')
   @Patch('updateQuestion')
   async updateQuestion(@Body() updateQuestionDto: updateMcqQuestionDto) {
       return this.testQuestionsService.updateQuestion(updateQuestionDto);

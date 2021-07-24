@@ -19,6 +19,7 @@ export interface Test extends mongoose.Document {
     testName: string;
     testDescription: string;
     questions: Question[];
+    numberOfQuestions: number;
     testDuration: number;
     testStatus: string;
     testIsOpen: boolean;

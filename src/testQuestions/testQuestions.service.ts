@@ -88,9 +88,15 @@ export class TestQuestionService {
   }
 
   async getTestById(testId: string) {
-    let randomQuestions = await this.questionModel.aggregate([{}])
     let testPopulate = await this.testModel.findOne({ testId: testId}).exec();
+    let numberOfQuestions = testPopulate.numberOfQuestions;
+    let randomQuestions = await this.questionModel.aggregate(
+      [
+      {$match: {isPublished: true}},
+      {$sample: {size: numberOfQuestions}}
+      ]).exec();
     testPopulate.questions = randomQuestions;
+
     if (testPopulate) {
       return testPopulate
     }
