@@ -15,7 +15,7 @@ import { AuthModule } from './auth/auth.module';
     QuizQuestionModule,
     QuizTestModule,
     MongooseModule.forRoot(
-      'mongodb+srv://dbUser:dbUser@123@cluster0.kxec3.mongodb.net/nestjs-quizapp?retryWrites=true&w=majority',
+      'mongodb+srv://tempusr:izuDmr9dsKUfxPi@cluster0.kxec3.mongodb.net/nestjs-quizapp?retryWrites=true&w=majority',
     ),
     AuthModule,
   ],
