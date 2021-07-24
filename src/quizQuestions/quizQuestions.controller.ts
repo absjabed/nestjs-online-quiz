@@ -1,9 +1,11 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { McqQuestionDto } from './dto/create-question.dto';
 import { updateMcqQuestionDto } from './dto/update-question.dto';
 import { Question } from './schemas/questions.schema';
 import { QuizQuestionService } from './quizQuestions.service';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
+@UseGuards(JwtAuthGuard)
 @Controller('quiz-questions')
 export class QuizQuestionsController {
   constructor(private readonly quizQuestionsService: QuizQuestionService) {}

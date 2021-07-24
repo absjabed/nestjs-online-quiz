@@ -13,5 +13,6 @@ import { QuizTestModule } from 'src/quizTest/quizTest.module';
   ],
   controllers: [UsersController],
   providers: [UsersService],
+  exports: [UsersService]
 })
 export class UsersModule {}

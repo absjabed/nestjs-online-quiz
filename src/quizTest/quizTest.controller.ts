@@ -1,8 +1,11 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { QuizTestService } from './quizTest.service';
 import { McqQuizDto } from './dto/create-quiz.dto';
 import { UpdateMcqQuizDto } from './dto/update-quiz.dto';
+import { Quiz } from './schemas/quiz.schema';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
+@UseGuards(JwtAuthGuard)
 @Controller('quiz-test')
 export class QuizTestController {
   constructor(private readonly quizTestService: QuizTestService) {}
@@ -12,17 +15,17 @@ export class QuizTestController {
       return this.quizTestService.addNewQuiz(mcqQuizDto);
   }
 
-  @Get('quiz/:quizId')
-  async getFullQuiz(@Param('quizId') quizId: string): Promise<any> {
-    const quiz = await this.quizTestService.getQuizById(quizId);
-    if(!quiz) return { msg: 'This quiz is not available.' };
-    return quiz;
+  @Get('availableQuizes')
+  async getAllQuizes(): Promise<any> {
+    const quizs: Quiz[] = await this.quizTestService.getAllQuizes();
+    if(quizs.length == 0) return { msg: 'No quiz available.' };
+    return quizs;
   }
 
-  @Get('deleteQuiz/:quizId')
-  async deleteQuiz(@Param('quizId') quizId: string): Promise<any> {
-      return this.quizTestService.deleteQuiz(quizId);
-  }
+  // @Get('deleteQuiz/:quizId')
+  // async deleteQuiz(@Param('quizId') quizId: string): Promise<any> {
+  //     return this.quizTestService.deleteQuiz(quizId);
+  // }
   
   @Patch('updateQuiz')
   async updateQuiz(@Body() updateMcqQuizDto: UpdateMcqQuizDto): Promise<any> {

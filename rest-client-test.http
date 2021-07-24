@@ -1,15 +1,42 @@
+### 1 - register a new user
+POST http://localhost:3000/users/registerUser
+Content-Type: application/json
+
+{ 
+    "username": "test2",
+    "fullName": "Test User 2",
+    "email": "test2@mail.com",
+    "password": "pass123",
+    "isadmin": false,
+    "role": "taker"
+}
+### 2 - login
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "username": "test2", 
+    "password": "pass123"
+}
+
+### 3 - get all available quizes
+GET  http://localhost:3000/quiz-test/availableQuizes
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjcxMzIyNTgsImV4cCI6MTYyNzEzNTg1OH0._-mm5YYuf9jS0tHVHOr_ZRkh91Mg-5ZUQeImOzVLqPQ
+
+### 4 - request for a quiz
 POST http://localhost:3000/users/requestQuiz
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjcxMzIyNTgsImV4cCI6MTYyNzEzNTg1OH0._-mm5YYuf9jS0tHVHOr_ZRkh91Mg-5ZUQeImOzVLqPQ
 
 {
     "username": "test2",
     "quizId": "quiz03"
 }
 
-###
-
+### 5 - submit quiz answer
 POST http://localhost:3000/users/submitQuiz
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjcxMzIyNTgsImV4cCI6MTYyNzEzNTg1OH0._-mm5YYuf9jS0tHVHOr_ZRkh91Mg-5ZUQeImOzVLqPQ
 
 {
     "username": "test2",
@@ -18,14 +45,10 @@ Content-Type: application/json
     "score": 30
 }
 
-###
-GET  http://localhost:3000/quiz-test/deleteQuiz/quiz01
-###
-GET  http://localhost:3000/quiz-test/quiz/quiz04
-
-###
+### 6 - Add new QuizTest
 POST http://localhost:3000/quiz-test/newQuizTest
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjcxMzIyNTgsImV4cCI6MTYyNzEzNTg1OH0._-mm5YYuf9jS0tHVHOr_ZRkh91Mg-5ZUQeImOzVLqPQ
 
 {
     "quizId": "quiz04",
@@ -37,22 +60,20 @@ Content-Type: application/json
     "quizIsOpen": false
 }
 
-###
-GET  http://localhost:3000/quiz-questions/questions
-
-###
-PATCH http://localhost:3000/quiz-questions/updateQuestion
+### 7 - update/patch a quiz
+PATCH http://localhost:3000/quiz-test/updateQuiz
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjcxMzIyNTgsImV4cCI6MTYyNzEzNTg1OH0._-mm5YYuf9jS0tHVHOr_ZRkh91Mg-5ZUQeImOzVLqPQ
 
 {
-    "questionId": "q1",
-    "questionName": "Meaning of life"
+    "quizId": "quiz04",
+    "quizIsOpen": true
 }
- 
 
-###
+### 8 - add a new quiz question
 POST http://localhost:3000/quiz-questions/newQuestion
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjcxMzIyNTgsImV4cCI6MTYyNzEzNTg1OH0._-mm5YYuf9jS0tHVHOr_ZRkh91Mg-5ZUQeImOzVLqPQ
 
 {
         "questionId": "q10",
@@ -84,24 +105,18 @@ Content-Type: application/json
         "isPublished": true
     }
 
+### 9 - get all available quiz questions
+GET  http://localhost:3000/quiz-questions/questions
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjcxMzIyNTgsImV4cCI6MTYyNzEzNTg1OH0._-mm5YYuf9jS0tHVHOr_ZRkh91Mg-5ZUQeImOzVLqPQ
 
-###
-GET  http://localhost:3000/users
-
-###
-
-POST http://localhost:3000/users
+### 10 - update/patch a quiz question
+PATCH http://localhost:3000/quiz-questions/updateQuestion
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjcxMzIyNTgsImV4cCI6MTYyNzEzNTg1OH0._-mm5YYuf9jS0tHVHOr_ZRkh91Mg-5ZUQeImOzVLqPQ
 
-{ 
-    "username": "test2",
-    "fullName": "Test User 2",
-    "email": "test2@mail.com",
-    "password": "pass123",
-    "isadmin": false,
-    "role": "taker"
+{
+    "questionId": "q1",
+    "questionName": "Meaning of life"
 }
-
-
 
 

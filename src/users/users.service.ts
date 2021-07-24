@@ -16,6 +16,12 @@ export class UsersService {
     @InjectModel('User') private readonly userModel: Model<User>, 
   ) {}
 
+  // async userLogin(usrname: string, password: string): Promise<any> {
+  //   const user = await this.findUser(usrname, null);
+  //   if(!user) return { msg: 'User not found' };
+  //   if(user.password !== password) return { msg: 'Wrong password' };
+  //   return { id: user.id as string, msg: 'Login successful' };
+  // }
 
   async requestQuizForUser(requestQuizDto: RequestQuizDto){
     const user = await this.findUserbyId(requestQuizDto.username);
@@ -97,7 +103,7 @@ export class UsersService {
   }
 
 
-  private async findUser(usrname: string, eml: string): Promise<User> {
+  async findUser(usrname: string, eml: string): Promise<User> {
     let user = await this.userModel.findOne().or([{ username: usrname }, { email: eml }]).exec();
     return user;
   }

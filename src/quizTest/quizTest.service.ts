@@ -61,6 +61,17 @@ export class QuizTestService {
       return quizPopulate
   }
 
+  async getAllQuizes(): Promise<any> {
+    let allQuizes = await this.quizModel.find({quizIsOpen: true}).exec();
+    return allQuizes.map(quiz => ({
+      quizId: quiz.quizId,
+      quizName: quiz.quizName,
+      quizDescription: quiz.quizDescription,
+      numberOfQuestions: quiz.numberOfQuestions,
+      quizDuration: quiz.quizDuration,
+    }));
+  }
+
   async updateQuiz(updateMcqQuizDto: UpdateMcqQuizDto) {
     const updatedQuiz = await this.quizExists(updateMcqQuizDto.quizId);
     if (updatedQuiz) {

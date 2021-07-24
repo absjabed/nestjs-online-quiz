@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { QuizQuestionModule } from './quizQuestions/quizQuestions.module';
 import { QuizTestModule } from './quizTest/quizTest.module';
 import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
@@ -16,6 +17,7 @@ import { UsersModule } from './users/users.module';
     MongooseModule.forRoot(
       'mongodb+srv://dbUser:dbUser@123@cluster0.kxec3.mongodb.net/nestjs-quizapp?retryWrites=true&w=majority',
     ),
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
