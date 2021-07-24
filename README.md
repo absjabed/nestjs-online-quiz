@@ -17,7 +17,7 @@ Online quiz application backend with Node.js framework. available features are u
 - PassportJs with Jwt
 - MongoDB
 - Mongoose
-- rest client
+- Rest client
 - git
 
 ## Application Entities
