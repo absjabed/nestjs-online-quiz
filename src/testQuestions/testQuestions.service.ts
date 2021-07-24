@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model, ObjectId, Types } from 'mongoose';
+import { Model } from 'mongoose';
 import { McqQuestionDto } from './dto/create-question.dto';
 import { McqTestDto } from './dto/create-test.dto';
 import { updateMcqQuestionDto } from './dto/update-question.dto';
@@ -88,17 +88,19 @@ export class TestQuestionService {
   }
 
   async getTestById(testId: string) {
-    let testPopulate = await this.testModel.findOne({ testId: testId}).exec();
-    let numberOfQuestions = testPopulate.numberOfQuestions;
-    let randomQuestions = await this.questionModel.aggregate(
-      [
-      {$match: {isPublished: true}},
-      {$sample: {size: numberOfQuestions}}
-      ]).exec();
-    testPopulate.questions = randomQuestions;
+    let testPopulate = await this.testModel.findOne({ testId: testId, testIsOpen: true}).exec();
 
     if (testPopulate) {
+      let numberOfQuestions = testPopulate.numberOfQuestions;
+      let randomQuestions = await this.questionModel.aggregate(
+        [
+        {$match: {isPublished: true}},
+        {$sample: {size: numberOfQuestions}}
+        ]).exec();
+      testPopulate.questions = randomQuestions;
       return testPopulate
+    }else{
+      return {msg: "This test is not available."}
     }
   }
 
