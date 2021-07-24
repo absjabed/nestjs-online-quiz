@@ -1,3 +1,24 @@
+POST http://localhost:3000/users/requestQuiz
+Content-Type: application/json
+
+{
+    "username": "test2",
+    "quizId": "quiz03"
+}
+
+###
+
+POST http://localhost:3000/users/submitQuiz
+Content-Type: application/json
+
+{
+    "username": "test2",
+    "quizId": "quiz03",
+    "requestId": "c5661978-eb8e-47ff-bbc0-611aa411a64d",
+    "score": 30
+}
+
+###
 GET  http://localhost:3000/quiz-test/deleteQuiz/quiz01
 ###
 GET  http://localhost:3000/quiz-test/quiz/quiz04
@@ -73,12 +94,12 @@ POST http://localhost:3000/users
 Content-Type: application/json
 
 { 
-    "username": "admin1",
-    "fullName": "Admin User",
-    "email": "admin1@mail.com",
+    "username": "test2",
+    "fullName": "Test User 2",
+    "email": "test2@mail.com",
     "password": "pass123",
-    "isadmin": true,
-    "role": "setter"
+    "isadmin": false,
+    "role": "taker"
 }
 
 

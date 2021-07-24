@@ -1,19 +1,13 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user-dto';
+import { RequestQuizDto } from './dto/request-quiz.dto';
+import { SubmittedQuizDto } from './dto/submitted-quiz.dto';
 import { User } from './schemas/users.schema';
 import { UsersService } from './users.service';
-
-// import { User } from './schemas/user.schema';
-// import { UsersService } from './users.service';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
-
-//   @Get(':userId')
-//   async getUser(@Param('userId') userId: string): Promise<User> {
-//     return this.usersService.getUserById(userId);
-//   }
 
   @Get()
   async getUsers(): Promise<User[]> {
@@ -25,8 +19,13 @@ export class UsersController {
       return this.usersService.createUser(createUserDto);
   }
 
-//   @Patch(':userId')
-//   async updateUser(@Param('userId') userId: string, @Body() updateUserDto: UpdateUserDto): Promise<User> {
-//       return this.usersService.updateUser(userId, updateUserDto);
-//   }
+  @Post('requestQuiz')
+  async requestQuizForUser(@Body() requestQuizDto: RequestQuizDto): Promise<any> {
+      return this.usersService.requestQuizForUser(requestQuizDto);
+  }
+
+  @Post('submitQuiz')
+  async submitQuizForUser(@Body() submittedQuizDto: SubmittedQuizDto): Promise<any> {
+      return this.usersService.submitQuiz(submittedQuizDto);
+  }
 }

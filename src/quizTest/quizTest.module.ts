@@ -14,5 +14,6 @@ import { QuizSchema } from './schemas/quiz.schema';
   ],
   controllers: [QuizTestController],
   providers: [QuizTestService],
+  exports: [QuizTestService],
 })
 export class QuizTestModule {}

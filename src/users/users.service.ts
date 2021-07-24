@@ -1,15 +1,59 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import { v4 as uuid } from 'uuid';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { QuizTestService } from 'src/quizTest/quizTest.service';
 import { CreateUserDto } from './dto/create-user-dto';
+import { RequestQuizDto } from './dto/request-quiz.dto';
+import { SubmittedQuizDto } from './dto/submitted-quiz.dto';
 
 import { User } from './schemas/users.schema';
 
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectModel('User') private readonly userModel: Model<User>,
+    private readonly quizTestService: QuizTestService,
+    @InjectModel('User') private readonly userModel: Model<User>, 
   ) {}
+
+
+  async requestQuizForUser(requestQuizDto: RequestQuizDto){
+    const user = await this.findUserbyId(requestQuizDto.username);
+        if(!user) return { msg: 'User not found' };
+    const didTakeQuiz = await this.userTakenTheQuiz(requestQuizDto.username, requestQuizDto.quizId);
+        if(didTakeQuiz) return { msg: 'User already took the quiz, try another one.' };
+    const quiz = await this.quizTestService.getQuizById(requestQuizDto.quizId);
+        if(!quiz) return { msg: 'This quiz is not available.' };
+    const reqId = uuid();
+      user.takenQuizes.push({
+        quizId: requestQuizDto.quizId,
+        requestId: reqId,
+        takenOn: new Date(),
+        finishedOn: new Date(),
+        numberOfQuestions: quiz ? quiz.numberOfQuestions : 0,
+        score: 0
+      });
+      await user.save();
+
+      return { requestId: reqId, quizObj: quiz};
+  }
+
+  async submitQuiz(submittedQuizDto: SubmittedQuizDto): Promise<any> {
+    const user = await this.findUserbyId(submittedQuizDto.username);
+      if(!user) return { msg: 'User not found' };
+    
+    let takenQuiz = user.takenQuizes.find(quiz => quiz.quizId === submittedQuizDto.quizId && quiz.requestId === submittedQuizDto.requestId);
+      if(!takenQuiz) return { msg: 'User did not take the quiz' };
+      
+    let filteredTakenQuizes = user.takenQuizes.filter(quiz => quiz.quizId !== submittedQuizDto.quizId);
+      takenQuiz.score = submittedQuizDto.score;
+      takenQuiz.finishedOn = new Date();
+    const finalTakenQuizes = filteredTakenQuizes.concat([takenQuiz]);
+
+    await user.updateOne({username: submittedQuizDto.username}).set('takenQuizes', finalTakenQuizes).exec();
+
+    return { msg: 'Quiz submitted successfully!', quizId: submittedQuizDto.quizId, score: submittedQuizDto.score};
+  }
 
   async createUser(userObj: CreateUserDto): Promise<any>{
     const newUser = new this.userModel({
@@ -36,51 +80,30 @@ export class UsersService {
         fullName: usr.fullName,
         email: usr.email,
         created: usr.created,
+        takenQuizes: usr.takenQuizes,
         isadmin: usr.isadmin,
         role: usr.role,
         isactive: usr.isactive
     }));
   }
 
-  // async getSingleUser(userId: string) {
-  //   const user = await this.findUser(userId);
-  //   if (user) {
-  //   return {
-  //     id: user.id,
-  //     title: user.title,
-  //     description: user.description,
-  //     price: user.price,
-  //   };
-  // }
+  private async userTakenTheQuiz(usrname: string, quizId: string){
+    let takenTheQuiz = await this.userModel.findOne({ username: usrname, takenQuizes: { $elemMatch: { quizId: quizId } } }).exec();
+    if(takenTheQuiz){
+      return true;
+    }else{
+      return false;
+    }
+  }
 
-//   async updateProduct(
-//     productId: string,
-//     title: string,
-//     desc: string,
-//     price: number,
-//   ) {
-//     const updatedProduct = await this.findProduct(productId);
-//     if (title) {
-//       updatedProduct.title = title;
-//     }
-//     if (desc) {
-//       updatedProduct.description = desc;
-//     }
-//     if (price) {
-//       updatedProduct.price = price;
-//     }
-//     updatedProduct.save();
-//   }
-
-//   async deleteProduct(prodId: string) {
-//     const result = await this.userModel.deleteOne({_id: prodId}).exec();
-//     if (result.n === 0) {
-//       throw new NotFoundException('Could not find product.');
-//     }
-//   }
 
   private async findUser(usrname: string, eml: string): Promise<User> {
     let user = await this.userModel.findOne().or([{ username: usrname }, { email: eml }]).exec();
+    return user;
+  }
+
+  private async findUserbyId(usrname: string): Promise<User> {
+    let user = await this.userModel.findOne({ username: usrname }).exec();
     return user;
   }
 }

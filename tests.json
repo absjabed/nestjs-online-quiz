@@ -1,47 +1,47 @@
 [
     {
-    "testId": "Test-01",
-    "testName": "Test-01",
-    "testDescription": "This is Test-01",
+    "quizId": "quiz01",
+    "quizName": "quiz-01",
+    "quizDescription": "This is quiz-01",
     "questionIds": [],
-    "testDuration": 10,
-    "testStatus": "active",
-    "testIsOpen": true
+    "quizDuration": 10,
+    "quizStatus": "active",
+    "quizIsOpen": true
     },
     {
-        "testId": "Test-02",
-        "testName": "Test-02",
-        "testDescription": "This is Test-02",
+        "quizId": "quiz02",
+        "quizName": "quiz-02",
+        "quizDescription": "This is quiz-02",
         "questionIds": [],
-        "testDuration": 10,
-        "testStatus": "active",
-        "testIsOpen": true
+        "quizDuration": 10,
+        "quizStatus": "active",
+        "quizIsOpen": true
     },
     {
-        "testId": "Test-03",
-        "testName": "Test-03",
-        "testDescription": "This is Test-03",
+        "quizId": "quiz03",
+        "quizName": "quiz-03",
+        "quizDescription": "This is quiz-03",
         "questionIds": [],
-        "testDuration": 10,
-        "testStatus": "active",
-        "testIsOpen": true
+        "quizDuration": 10,
+        "quizStatus": "active",
+        "quizIsOpen": true
     },
     {
-        "testId": "Test-04",
-        "testName": "Test-04",
-        "testDescription": "This is Test-04",
+        "quizId": "quiz04",
+        "quizName": "quiz-04",
+        "quizDescription": "This is quiz-04",
         "questionIds": [],
-        "testDuration": 10,
-        "testStatus": "active",
-        "testIsOpen": true
+        "quizDuration": 10,
+        "quizStatus": "active",
+        "quizIsOpen": false
     },
     {
-        "testId": "Test-05",
-        "testName": "Test-05",
-        "testDescription": "This is Test-05",
+        "quizId": "quiz05",
+        "quizName": "quiz-05",
+        "quizDescription": "This is quiz-05",
         "questionIds": [],
-        "testDuration": 10,
-        "testStatus": "active",
-        "testIsOpen": true
+        "quizDuration": 10,
+        "quizStatus": "active",
+        "quizIsOpen": true
     }
 ]

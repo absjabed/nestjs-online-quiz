@@ -1,4 +1,4 @@
-export class UserWiseQuizDto {
+export class RequestQuizDto {
     username: string;
     quizId: string;
 }
