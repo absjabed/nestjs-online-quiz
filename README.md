@@ -14,18 +14,16 @@ Online quiz application backend with Node.js framework. available features are u
 
 - Node.js, NestJs
 - Typescript
-- PassportJs with Jwt - for authentication
+- PassportJs with Jwt
 - MongoDB
 - Mongoose
 - rest client
 - git
 
-
-
-
 ## Installation
 
 ```bash
+$ npm install -g @nestjs/cli
 $ npm install
 ```
 
@@ -95,7 +93,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9....
     "score": 30
 }
 ```
-### 6 - Add new QuizTest
+### 6 - Add new QuizTest [(Example Quizes in Json Format)](./example-quizes.json)
 ```
 POST http://localhost:3000/quiz-test/newQuizTest
 Content-Type: application/json
@@ -122,11 +120,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9....
     "quizIsOpen": true
 }
 ```
-### 8 - add a new quiz question
+### 8 - add a new quiz question [(Example Questions in Json Format)](./example-questions.json)
 ```
 POST http://localhost:3000/quiz-questions/newQuestion
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjcxMzIyNTgsImV4cCI6MTYyNzEzNTg1OH0._-mm5YYuf9jS0tHVHOr_ZRkh91Mg-5ZUQeImOzVLqPQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9....
 
 {
         "questionId": "q10",
