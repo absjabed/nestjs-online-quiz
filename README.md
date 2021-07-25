@@ -2,8 +2,8 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
 </p>
 
-# Back-End Developer Challenge (TECHHACK CANADA)
-## Online Quiz Application using Nest.js and MongoDB
+# Online Quiz Application using Nest.js and MongoDB
+
 [Nest](https://github.com/nestjs/nest) is a prograssive [Node.js](https://nodejs.org) framework with TypeScript for building efficient and scalable server-side/backend applications.
 
 ## Description
